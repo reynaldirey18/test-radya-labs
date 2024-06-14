@@ -35,4 +35,4 @@ To learn more about Next.js, take a look at the following resources:
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
 ## link soal
-- [Soal]([https://nextjs.org/learn](https://test-radya-labs-rey.vercel.app](https://docs.google.com/document/d/1A62CsO9BZ-6YbRb4bUSheZuZZCp45flLcE2FCPTzOpI/edit#heading=h.jjfwazmzuo44)) 
+- [soal](https://docs.google.com/document/d/1A62CsO9BZ-6YbRb4bUSheZuZZCp45flLcE2FCPTzOpI/edit#heading=h.jjfwazmzuo44)

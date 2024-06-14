@@ -1,6 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
 import pokemonReducer from "./features/pokemon/catch";
-import storage from "redux-persist/lib/storage";
 
 export const makeStore = () => {
   return configureStore({

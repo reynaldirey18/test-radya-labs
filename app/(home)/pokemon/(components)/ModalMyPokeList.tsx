@@ -35,11 +35,13 @@ export default function ModalMyPokeList({
   const [myPokemon, setMyPokemon] = useState<string[]>([]);
 
   useMemo(() => {
-    const storedPokemon = localStorage.getItem("pokemon");
-    if (storedPokemon) {
-      setMyPokemon(JSON.parse(storedPokemon));
-    } else {
-      setMyPokemon([]);
+    if (typeof window !== "undefined") {
+      const storedPokemon = localStorage.getItem("pokemon");
+      if (storedPokemon) {
+        setMyPokemon(JSON.parse(storedPokemon));
+      } else {
+        setMyPokemon([]);
+      }
     }
   }, [open]);
 

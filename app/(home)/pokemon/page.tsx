@@ -1,5 +1,5 @@
 "use client";
-import { IconButton, Card, CardContent } from "@mui/material";
+import { IconButton, Card, CardContent, Tooltip } from "@mui/material";
 import { useGetPokemonList } from "./hooks";
 import { DataGrid, GridRenderCellParams } from "@mui/x-data-grid";
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -14,23 +14,27 @@ export default function PokemonGo() {
     {
       field: "imageUrl",
       headerName: "Image",
-      width: 150,
+      width: 200,
       renderCell: (params: GridRenderCellParams<any, string>) =>
         PokemonImage({ params }),
     },
-    { field: "name", headerName: "Name", width: 150 },
+    { field: "name", headerName: "Name", width: 300, flex: 1 },
     {
       field: "action",
       headerName: "Action",
       width: 150,
+      headerAlign: "center",
+      align: "center",
       renderCell: (params: GridRenderCellParams<any, string>) => (
-        <IconButton
-          onClick={() => router.push(`/pokemon/${params.row.name}`)}
-          color="primary"
-          aria-label="view details"
-        >
-          <VisibilityIcon />
-        </IconButton>
+        <Tooltip title="View Detail">
+          <IconButton
+            onClick={() => router.push(`/pokemon/${params.row.name}`)}
+            color="primary"
+            aria-label="view details"
+          >
+            <VisibilityIcon />
+          </IconButton>
+        </Tooltip>
       ),
     },
   ];
@@ -87,6 +91,7 @@ export default function PokemonGo() {
             paginationMode="server"
             onPaginationModelChange={onPaginationChange}
             rowHeight={100}
+            disableColumnSorting
           />
         </CardContent>
       </Card>

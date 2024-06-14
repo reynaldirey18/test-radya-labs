@@ -5,7 +5,7 @@
 import { Inter } from "next/font/google";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import { ThemeProvider } from "@mui/material/styles";
-import { Switch, FormControlLabel } from "@mui/material";
+import { Switch, FormControlLabel, AppBar, Typography } from "@mui/material";
 import "./globals.css";
 import { Provider } from "./provider";
 import { lightTheme, darkTheme } from "./theme";
@@ -32,17 +32,30 @@ export default function RootLayout({
         <Provider>
           <ThemeProvider theme={selectedTheme}>
             <body className={isDarkMode ? "dark" : "light"}>
-              <FormControlLabel
-                control={
-                  <Switch
-                    checked={isDarkMode}
-                    onChange={toggleDarkMode}
-                    name="darkModeSwitch"
-                    inputProps={{ "aria-label": "toggle dark mode" }}
+              <AppBar
+                position="static"
+                color="inherit"
+                enableColorOnDark
+                className="mb-5 py-4"
+              >
+                <div className="flex justify-between items-center px-4">
+                  <Typography gutterBottom variant="h5" component="span">
+                    {" "}
+                    Reynaldi Rangga Prayuda{" "}
+                  </Typography>
+                  <FormControlLabel
+                    control={
+                      <Switch
+                        checked={isDarkMode}
+                        onChange={toggleDarkMode}
+                        name="darkModeSwitch"
+                        inputProps={{ "aria-label": "toggle dark mode" }}
+                      />
+                    }
+                    label={isDarkMode ? "Dark Mode" : "Light Mode"}
                   />
-                }
-                label={isDarkMode ? "Dark Mode" : "Light Mode"}
-              />
+                </div>
+              </AppBar>
               {children}
             </body>
           </ThemeProvider>

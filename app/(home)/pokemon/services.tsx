@@ -11,3 +11,9 @@ export async function getPokemonList({ limit, offset }: IListPokemon) {
     })
     .then((res) => res);
 }
+
+export async function getPokemonDetail(name: string) {
+  return axios
+    .get(`${process.env.NEXT_PUBLIC_API_URL}/pokemon/${name}`)
+    .then((res) => res);
+}

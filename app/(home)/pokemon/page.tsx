@@ -1,7 +1,7 @@
 "use client";
 import { IconButton, Card, CardContent, Tooltip } from "@mui/material";
 import { useGetPokemonList } from "./hooks";
-import { DataGrid, GridRenderCellParams } from "@mui/x-data-grid";
+import { DataGrid, GridRenderCellParams, GridColDef } from "@mui/x-data-grid";
 import { useEffect, useMemo, useRef, useState } from "react";
 import PokemonImage from "./(components)/pokeImage";
 import VisibilityIcon from "@mui/icons-material/Visibility";
@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 
 export default function PokemonGo() {
   const router = useRouter();
-  const columns = [
+  const columns: GridColDef[] = [
     { field: "pokemonNumber", headerName: "No", width: 150 },
     {
       field: "imageUrl",

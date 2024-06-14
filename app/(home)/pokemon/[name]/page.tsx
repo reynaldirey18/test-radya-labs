@@ -19,8 +19,7 @@ export default function PokemonGoDetail({
 }) {
   const router = useRouter();
 
-  const { data, error, isLoading } = useGetPokemonDetail(params.name);
-  console.log("data", data);
+  const { data } = useGetPokemonDetail(params.name);
   return (
     <div className="m-5">
       <IconButton onClick={() => router.push(`/pokemon`)} color="primary">

@@ -1,14 +1,19 @@
 "use client";
-import { IconButton, Card, CardContent, Tooltip } from "@mui/material";
+import { IconButton, Button, Card, CardContent, Tooltip } from "@mui/material";
 import { useGetPokemonList } from "./hooks";
 import { DataGrid, GridRenderCellParams, GridColDef } from "@mui/x-data-grid";
 import { useEffect, useMemo, useRef, useState } from "react";
 import PokemonImage from "./(components)/pokeImage";
+import ModalMyPokeList from "./(components)/ModalMyPokeList";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { useRouter } from "next/navigation";
+import { RootState } from "@/lib/store";
+import CatchingPokemonIcon from "@mui/icons-material/CatchingPokemon";
 
 export default function PokemonGo() {
   const router = useRouter();
+  const [open, setOpen] = useState(false);
+
   const columns: GridColDef[] = [
     { field: "pokemonNumber", headerName: "No", width: 150 },
     {
@@ -26,15 +31,24 @@ export default function PokemonGo() {
       headerAlign: "center",
       align: "center",
       renderCell: (params: GridRenderCellParams<any, string>) => (
-        <Tooltip title="View Detail">
-          <IconButton
-            onClick={() => router.push(`/pokemon/${params.row.name}`)}
-            color="primary"
-            aria-label="view details"
-          >
-            <VisibilityIcon />
-          </IconButton>
-        </Tooltip>
+        <div>
+          <Tooltip title="Tangkap">
+            <IconButton
+              onClick={() => handleAddPokemon(params?.row?.name)}
+              color="primary"
+            >
+              <CatchingPokemonIcon />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="View Detail">
+            <IconButton
+              onClick={() => router.push(`/pokemon/${params.row.name}`)}
+              aria-label="view details"
+            >
+              <VisibilityIcon />
+            </IconButton>
+          </Tooltip>
+        </div>
       ),
     },
   ];
@@ -75,12 +89,27 @@ export default function PokemonGo() {
       pageSize: pagination.pageSize,
     });
   };
+  const handleAddPokemon = (val: string) => {
+    if (typeof window !== "undefined") {
+      const storedPokemon = localStorage.getItem("pokemon");
+      const item = storedPokemon ? JSON.parse(storedPokemon) : [];
+      if (!item.includes(val)) {
+        item.push(val);
+        localStorage.setItem("pokemon", JSON.stringify(item));
+      }
+    }
+  };
 
   return (
     <div>
       <Card className="m-10">
         <CardContent>
-          <p className="text-lg font-bold">Pokemon Go Go Go....</p>
+          <div className="flex flex-row justify-between my-3">
+            <p className="text-lg font-bold">Pokemon Go Go Go....</p>
+            <Button variant="contained" onClick={() => setOpen(!open)}>
+              View My Pokemon
+            </Button>
+          </div>
           <DataGrid
             rows={items}
             columns={columns}
@@ -95,6 +124,7 @@ export default function PokemonGo() {
           />
         </CardContent>
       </Card>
+      <ModalMyPokeList open={open} handleClose={() => setOpen(false)} />
     </div>
   );
 }

@@ -8,10 +8,36 @@ const roboto = Roboto({
   display: "swap",
 });
 
-const theme = createTheme({
+// Tema untuk mode terang
+const lightTheme = createTheme({
+  palette: {
+    mode: "light",
+    primary: {
+      main: "#1976d2",
+    },
+    secondary: {
+      main: "#f50057",
+    },
+  },
   typography: {
     fontFamily: roboto.style.fontFamily,
   },
 });
 
-export default theme;
+// Tema untuk mode gelap
+const darkTheme = createTheme({
+  palette: {
+    mode: "dark",
+    primary: {
+      main: "#90caf9",
+    },
+    secondary: {
+      main: "#f48fb1",
+    },
+  },
+  typography: {
+    fontFamily: roboto.style.fontFamily,
+  },
+});
+
+export { lightTheme, darkTheme };
